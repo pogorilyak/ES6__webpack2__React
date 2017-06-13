@@ -1,0 +1,8 @@
+# Created by .ignore support plugin (hsz.mobi)
+.gitignore
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/reactTemplatesPlugin.xml
+.idea/vagrant.xml
+.idea/workspace.xml
+node_modules/

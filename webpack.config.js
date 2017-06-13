@@ -8,7 +8,7 @@ let extractPlugin = new ExtractTextPlugin({
 });
 
 module.exports = {
-    entry: './src/js/app.js',
+    entry: './src/js/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
@@ -18,19 +18,18 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                use: [
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: ['es2015']
-                        }
-                    }
-                ]
+                exclude: /node_modules/,
+                use: 'babel-loader'
+            },
+            {
+                test: /\.json$/,
+                use: 'json-loader'
             },
             {
                 test: /\.scss$/,
                 use: extractPlugin.extract({
-                    use: ['css-loader', 'sass-loader']
+                    use: ['css-loader', 'sass-loader'],
+                    publicPath: '/dist'
                 })
             },
             {
@@ -51,10 +50,18 @@ module.exports = {
             }
         ]
     },
+    devServer: {
+        contentBase: path.join(__dirname, "dist"),
+        compress: true,
+        stats: "errors-only",
+        open: true
+    },
     plugins: [
         extractPlugin,
         new HtmlWebpackPlugin({
-            template: 'src/index.html'
+            title: 'ToDo',
+            hash: true,
+            template: './src/index.html'
         }),
         new CleanWebpackPlugin(['dist'])
     ]

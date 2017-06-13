@@ -1,0 +1,7 @@
+@mixin gradient-blue($opacity) {
+  background: linear-gradient(
+                  to right,
+                  rgba(93, 133, 195, $opacity),
+                  rgba(79, 192, 212, $opacity));
+  color: #fff;
+}
